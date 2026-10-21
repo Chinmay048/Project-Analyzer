@@ -30,22 +30,22 @@ interface InputCardProps {
   onActivitiesChange: (acts: ActivityIn[]) => void;
 
   // Options
-  roundTe: boolean;
-  onRoundTeChange: (round: boolean) => void;
-  variancePolicy: VariancePolicy;
-  onVariancePolicyChange: (policy: VariancePolicy) => void;
+  roundTe?: boolean;
+  onRoundTeChange?: (round: boolean) => void;
+  variancePolicy?: VariancePolicy;
+  onVariancePolicyChange?: (policy: VariancePolicy) => void;
   targetTime: string;
   onTargetTimeChange: (val: string) => void;
-  targetDelta: string;
-  onTargetDeltaChange: (val: string) => void;
+  targetDelta?: string;
+  onTargetDeltaChange?: (val: string) => void;
   targetProbability: string;
   onTargetProbabilityChange: (val: string) => void;
-  renumber: string; // 'auto' | 'true' | 'false'
-  onRenumberChange: (val: string) => void;
-  danglingPolicy: DanglingPolicy;
-  onDanglingPolicyChange: (val: DanglingPolicy) => void;
-  strictEstimates: boolean;
-  onStrictEstimatesChange: (val: boolean) => void;
+  renumber?: string; // 'auto' | 'true' | 'false'
+  onRenumberChange?: (val: string) => void;
+  danglingPolicy?: DanglingPolicy;
+  onDanglingPolicyChange?: (val: DanglingPolicy) => void;
+  strictEstimates?: boolean;
+  onStrictEstimatesChange?: (val: boolean) => void;
   crashTarget: string;
   onCrashTargetChange: (val: string) => void;
 
@@ -75,22 +75,10 @@ export const InputCard: React.FC<InputCardProps> = ({
   onTimeModeChange,
   activities,
   onActivitiesChange,
-  roundTe,
-  onRoundTeChange,
-  variancePolicy,
-  onVariancePolicyChange,
   targetTime,
   onTargetTimeChange,
-  targetDelta,
-  onTargetDeltaChange,
   targetProbability,
   onTargetProbabilityChange,
-  renumber,
-  onRenumberChange,
-  danglingPolicy,
-  onDanglingPolicyChange,
-  strictEstimates,
-  onStrictEstimatesChange,
   crashTarget,
   onCrashTargetChange,
   onSolve,
@@ -987,44 +975,13 @@ export const InputCard: React.FC<InputCardProps> = ({
             <span>Advanced Calculation Options & Targets</span>
           </div>
           <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)' }}>
-            {roundTe || targetTime || targetDelta || targetProbability || crashTarget ? 'Customized' : 'Defaults'}
+            {targetTime || targetProbability || crashTarget ? 'Customized' : 'Defaults'}
           </span>
         </div>
 
         <div className={`options-accordion-grid ${showOptions ? 'open' : ''}`}>
           <div className="options-accordion-content">
             <div className="options-inner-grid">
-              {/* Round Te Option */}
-              <div className="option-field">
-                <span className="option-label">PERT Duration Rounding</span>
-                <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', height: '38px', fontSize: '13px' }}>
-                  <input
-                    type="checkbox"
-                    checked={roundTe}
-                    onChange={(e) => onRoundTeChange(e.target.checked)}
-                    style={{ width: '16px', height: '16px', accentColor: 'var(--accent)' }}
-                  />
-                  <span>Round Te to whole numbers</span>
-                </label>
-              </div>
-
-              {/* Variance Policy */}
-              <div className="option-field">
-                <label htmlFor="variance-policy-select" className="option-label">
-                  Variance Tie-Breaker
-                </label>
-                <select
-                  id="variance-policy-select"
-                  className="input-select"
-                  value={variancePolicy}
-                  onChange={(e) => onVariancePolicyChange(e.target.value as VariancePolicy)}
-                >
-                  <option value="max">Maximum variance (standard)</option>
-                  <option value="min">Minimum variance</option>
-                  <option value="first">First critical path</option>
-                </select>
-              </div>
-
               {/* Target Time */}
               <div className="option-field">
                 <label htmlFor="target-time-input" className="option-label">
@@ -1038,22 +995,6 @@ export const InputCard: React.FC<InputCardProps> = ({
                   value={targetTime}
                   onChange={(e) => onTargetTimeChange(e.target.value)}
                   placeholder="e.g. 24"
-                />
-              </div>
-
-              {/* Target Delta */}
-              <div className="option-field">
-                <label htmlFor="target-delta-input" className="option-label">
-                  Target Delta (± days)
-                </label>
-                <input
-                  id="target-delta-input"
-                  type="number"
-                  step="any"
-                  className="input-text tabular"
-                  value={targetDelta}
-                  onChange={(e) => onTargetDeltaChange(e.target.value)}
-                  placeholder="e.g. -4 (4 days earlier)"
                 />
               </div>
 
@@ -1087,53 +1028,6 @@ export const InputCard: React.FC<InputCardProps> = ({
                   onChange={(e) => onCrashTargetChange(e.target.value)}
                   placeholder="e.g. 18 days"
                 />
-              </div>
-
-              {/* Fulkerson Renumbering */}
-              <div className="option-field">
-                <label htmlFor="renumber-select" className="option-label">
-                  Fulkerson Renumbering
-                </label>
-                <select
-                  id="renumber-select"
-                  className="input-select"
-                  value={renumber}
-                  onChange={(e) => onRenumberChange(e.target.value)}
-                >
-                  <option value="auto">Auto (renumber in predecessors mode)</option>
-                  <option value="true">Always renumber (i &lt; j)</option>
-                  <option value="false">Keep input node numbers</option>
-                </select>
-              </div>
-
-              {/* Dangling Policy */}
-              <div className="option-field">
-                <label htmlFor="dangling-policy-select" className="option-label">
-                  Dangling Events Policy
-                </label>
-                <select
-                  id="dangling-policy-select"
-                  className="input-select"
-                  value={danglingPolicy}
-                  onChange={(e) => onDanglingPolicyChange(e.target.value as DanglingPolicy)}
-                >
-                  <option value="connect">Auto-connect to start/finish</option>
-                  <option value="error">Strict error on disconnected nodes</option>
-                </select>
-              </div>
-
-              {/* Strict Estimates */}
-              <div className="option-field">
-                <span className="option-label">Validation Strictness</span>
-                <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', height: '38px', fontSize: '13px' }}>
-                  <input
-                    type="checkbox"
-                    checked={strictEstimates}
-                    onChange={(e) => onStrictEstimatesChange(e.target.checked)}
-                    style={{ width: '16px', height: '16px', accentColor: 'var(--accent)' }}
-                  />
-                  <span>Error if m outside [a, b]</span>
-                </label>
               </div>
             </div>
           </div>
