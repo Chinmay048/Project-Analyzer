@@ -1,0 +1,221 @@
+/* ==========================================================================
+   Header Component Styles
+   ========================================================================== */
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2-5);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.header-title-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.header-title-text {
+  font-weight: 700;
+  font-size: var(--text-body);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.header-title-short {
+  display: none;
+}
+
+.header-badge-chip {
+  font-size: var(--text-2xs);
+  padding: 2px 7px;
+  height: 20px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Samples Dropdown Menu */
+.samples-popover {
+  width: 320px;
+  right: 0;
+  padding: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.samples-header-label {
+  padding: 8px 12px 6px;
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  letter-spacing: 0.04em;
+}
+
+.samples-group-title {
+  padding: 6px 12px 2px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+}
+
+.sample-menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  text-align: left;
+  transition: background var(--duration-quick) var(--ease-out);
+  width: 100%;
+}
+
+.sample-menu-item:hover,
+.sample-menu-item:focus-visible {
+  background: var(--bg-secondary);
+  outline: none;
+}
+
+.sample-menu-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: var(--space-2);
+}
+
+.sample-menu-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.sample-menu-desc {
+  font-size: var(--text-2xs);
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* Server Status Pill */
+.header-status-pill {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  font-size: var(--text-xs);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+  transition: background var(--duration-quick) var(--ease-out);
+  white-space: nowrap;
+}
+
+.header-status-pill.online {
+  background: var(--success-tint);
+  color: var(--success-text);
+  border: 1px solid var(--success-border);
+}
+
+.header-status-pill.offline {
+  background: var(--critical-tint);
+  color: var(--critical-text);
+  border: 1px solid var(--critical-tint-border);
+}
+
+.status-indicator-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-indicator-dot.online {
+  background: var(--success);
+}
+
+.status-indicator-dot.offline {
+  background: var(--critical);
+}
+
+/* Settings Popover Form */
+.settings-popover {
+  width: 320px;
+  padding: var(--space-4);
+}
+
+.settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3-5);
+}
+
+.settings-title {
+  font-size: var(--text-base);
+  font-weight: 700;
+}
+
+.settings-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3-5);
+}
+
+.settings-field-label {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  margin-bottom: var(--space-1-5);
+  color: var(--text-secondary);
+}
+
+/* Responsive Rules */
+@media (max-width: 640px) {
+  .header-badge-chip {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .frosted-header {
+    padding: var(--space-2-5) var(--space-3-5);
+  }
+
+  .header-title-full {
+    display: none;
+  }
+
+  .header-title-short {
+    display: inline;
+  }
+
+  .samples-btn-text {
+    display: none;
+  }
+
+  .samples-btn-chevron {
+    display: none;
+  }
+
+  .status-pill-text {
+    display: none;
+  }
+
+  .header-status-pill {
+    padding: 6px;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    justify-content: center;
+  }
+}

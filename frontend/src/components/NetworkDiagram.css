@@ -1,0 +1,467 @@
+/* ==========================================================================
+   Network Diagram Styles (Apple-Grade Polish & Motion)
+   ========================================================================== */
+
+.diagram-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 60vh;
+  transition: box-shadow var(--duration-normal) ease;
+}
+
+.diagram-card.is-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  border-radius: 0;
+  border: none;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  max-width: 100vw;
+  margin: 0;
+}
+
+/* Header bar */
+.diagram-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+  z-index: 10;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.diagram-title-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.diagram-title {
+  font-size: var(--text-base);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+/* Legend Pill */
+.diagram-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 10px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  user-select: none;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+}
+
+.legend-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-line {
+  width: 12px;
+  height: 2.5px;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.legend-line.dashed {
+  background: transparent;
+  border-top: 1.5px dashed var(--diagram-edge-neutral);
+  height: 0;
+}
+
+/* Canvas Area */
+.diagram-canvas-wrapper {
+  flex: 1;
+  min-height: 540px;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--diagram-bg);
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.diagram-canvas-wrapper:active {
+  cursor: grabbing;
+}
+
+.diagram-svg {
+  position: absolute;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+/* SVG Elements & Transitions */
+.node-group {
+  cursor: pointer;
+  outline: none;
+}
+
+.node-circle {
+  fill: var(--diagram-node-fill);
+  stroke: var(--diagram-node-stroke);
+  stroke-width: 1.5px;
+  transition: stroke var(--duration-fast) ease, stroke-width var(--duration-fast) ease, filter var(--duration-fast) ease;
+}
+
+.node-group:hover .node-circle,
+.node-group.is-active .node-circle {
+  stroke: var(--accent);
+  stroke-width: 3px;
+  filter: drop-shadow(0 2px 8px var(--accent-tint));
+}
+
+.node-id {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 600;
+  fill: var(--diagram-node-text);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  user-select: none;
+}
+
+.node-pill {
+  fill: var(--diagram-pill-bg);
+  stroke: var(--diagram-pill-border);
+  stroke-width: 1px;
+}
+
+.node-time-text {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Edge & Arrow Lines */
+.edge-group {
+  cursor: pointer;
+  transition: opacity var(--duration-normal) ease;
+}
+
+.edge-path {
+  fill: none;
+  stroke: var(--diagram-edge-neutral);
+  stroke-width: 1.75px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke var(--duration-fast) ease, stroke-width var(--duration-fast) ease, filter var(--duration-fast) ease;
+}
+
+.edge-path.is-critical {
+  stroke: var(--diagram-edge-critical);
+  stroke-width: 3px;
+}
+
+.edge-path.is-dummy {
+  stroke-dasharray: 6 5;
+  stroke-width: 1.5px;
+}
+
+.edge-path.is-active {
+  stroke: var(--accent);
+  stroke-width: 3.5px;
+  filter: drop-shadow(0 0 6px var(--accent-tint));
+}
+
+.edge-path.is-active.is-critical {
+  stroke: var(--diagram-edge-critical);
+  filter: drop-shadow(0 0 8px var(--critical-tint));
+}
+
+/* Arrow Label Badges */
+.edge-badge-group {
+  cursor: pointer;
+  transition: opacity var(--duration-normal) ease, transform var(--duration-fast) var(--spring-snappy);
+}
+
+.edge-badge-rect {
+  fill: var(--diagram-label-bg);
+  stroke: var(--diagram-label-border);
+  stroke-width: 1px;
+  rx: 6px;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.12));
+  transition: stroke var(--duration-fast) ease, filter var(--duration-fast) ease;
+}
+
+.edge-badge-group:hover .edge-badge-rect,
+.edge-badge-group.is-active .edge-badge-rect {
+  stroke: var(--accent);
+  stroke-width: 1.75px;
+  filter: drop-shadow(0 2px 8px var(--accent-tint));
+}
+
+.edge-badge-group.is-critical .edge-badge-rect {
+  stroke: var(--diagram-edge-critical);
+}
+
+.edge-badge-text {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  user-select: none;
+  paint-order: stroke fill;
+  stroke: var(--diagram-label-bg);
+  stroke-width: 2px;
+  stroke-linejoin: round;
+}
+
+.edge-badge-text.is-critical {
+  fill: var(--diagram-edge-critical);
+}
+
+.edge-badge-text.is-active {
+  fill: var(--accent);
+}
+
+/* Floating Toolbar */
+.diagram-floating-toolbar {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 7px;
+  background: var(--bg-popover);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  z-index: 30;
+}
+
+.diagram-tool-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background var(--duration-fast) ease, color var(--duration-fast) ease, transform var(--duration-fast) var(--spring-snappy);
+  position: relative;
+}
+
+.diagram-tool-btn:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  transform: scale(1.06);
+}
+
+.diagram-tool-btn:active {
+  transform: scale(0.94);
+}
+
+.diagram-tool-btn:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.diagram-divider {
+  width: 1px;
+  height: 16px;
+  background: var(--border);
+  margin: 0 3px;
+}
+
+/* Tooltip & Inspector Popovers */
+.diagram-glass-tooltip {
+  position: absolute;
+  pointer-events: none;
+  z-index: 50;
+  width: 250px;
+  padding: 12px 14px;
+  background: var(--bg-popover);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-popover);
+  font-size: var(--text-xs);
+  line-height: 1.4;
+  animation: popoverFadeIn var(--duration-quick) var(--ease-out-expo);
+}
+
+.diagram-tooltip-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+.diagram-tooltip-title {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.diagram-tooltip-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 10px;
+  font-variant-numeric: tabular-nums;
+  margin-top: 6px;
+}
+
+.diagram-tooltip-stat {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-secondary);
+}
+
+.diagram-tooltip-stat strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Pinned Edge Inspector */
+.diagram-pinned-inspector {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  max-width: 460px;
+  width: calc(100% - 36px);
+  padding: 12px 16px;
+  background: var(--bg-popover);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1.5px solid var(--accent);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  z-index: 40;
+  animation: slideUpFade var(--duration-normal) var(--spring-snappy);
+}
+
+/* Path Drawing Animations */
+@keyframes drawArrowPath {
+  from {
+    stroke-dashoffset: var(--path-length, 1000);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes nodePopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes settleCriticalGlow {
+  0% {
+    filter: drop-shadow(0 0 0px var(--critical-tint));
+  }
+  50% {
+    filter: drop-shadow(0 0 10px var(--critical-tint));
+  }
+  100% {
+    filter: drop-shadow(0 0 3px var(--critical-tint));
+  }
+}
+
+.anim-draw {
+  stroke-dasharray: var(--path-length, 1000);
+  stroke-dashoffset: var(--path-length, 1000);
+  animation: drawArrowPath 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--draw-delay, 0ms);
+}
+
+.anim-critical-draw {
+  stroke-dasharray: var(--path-length, 1000);
+  stroke-dashoffset: var(--path-length, 1000);
+  animation: drawArrowPath 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+             settleCriticalGlow 0.8s ease-out 0.6s forwards;
+  animation-delay: var(--draw-delay, 250ms);
+}
+
+.anim-node-pop {
+  transform-origin: center;
+  animation: nodePopIn 0.35s var(--spring-bounce) forwards;
+  animation-delay: var(--pop-delay, 0ms);
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popoverFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .anim-draw,
+  .anim-critical-draw,
+  .anim-node-pop,
+  .diagram-pinned-inspector,
+  .diagram-glass-tooltip {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

@@ -1,32 +1,34 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# Environment files & secrets (DO NOT COMMIT)
+.env
+.env*
+*.env
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
 
-# Dependencies
+# Python
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+ENV/
+
+# Node / Frontend
 node_modules/
-
-# Production build output
+**/node_modules/
 dist/
-dist-ssr/
-*.local
-*.tsbuildinfo
+**/dist/
+.npm/
 
-# Vite generated configs
-vite.config.js
-vite.config.d.ts
-
-# Editor and OS files
-.vscode/*
-!.vscode/extensions.json
+# Deployment & IDE & OS
+.vercel/
 .idea/
+.vscode/
+*.swp
+*.swo
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db

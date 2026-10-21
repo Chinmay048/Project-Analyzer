@@ -1,0 +1,187 @@
+/* ==========================================================================
+   App Layout, Stale Banner, Skeletons, and Footer Styles
+   ========================================================================== */
+
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.app-main {
+  flex: 1;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-5) var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* Friendly empty results hint */
+.empty-results-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-6);
+  background: var(--bg-card);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-card);
+  color: var(--text-tertiary);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.empty-results-kbd {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 7px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+/* Stale Results Banner */
+.stale-banner-wrapper {
+  overflow: hidden;
+  transition: all var(--duration-normal) var(--spring-snappy);
+}
+
+.stale-results-banner {
+  background: var(--warning-tint);
+  border: 1px solid var(--warning-border);
+  border-radius: var(--radius-card);
+  padding: 12px 18px;
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  animation: slideDownBanner var(--duration-normal) var(--spring-snappy) forwards;
+}
+
+@keyframes slideDownBanner {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stale-banner-text {
+  font-size: var(--text-xs);
+  color: var(--warning-text);
+  font-weight: 500;
+}
+
+/* Realistic Multi-Part Loading Skeleton matching real layout */
+.results-loading-skeleton {
+  padding: var(--space-6);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+
+.skeleton-tiles-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.skeleton-hero-tile {
+  height: 96px;
+  border-radius: var(--radius-md);
+}
+
+.skeleton-tile {
+  height: 96px;
+  border-radius: var(--radius-md);
+}
+
+.skeleton-diagram-block {
+  height: 380px;
+  border-radius: var(--radius-md);
+  width: 100%;
+}
+
+.skeleton-table-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skeleton-table-row {
+  height: 34px;
+  border-radius: var(--radius-xs);
+  width: 100%;
+}
+
+/* Useful Apple Footer */
+.app-footer {
+  border-top: 1px solid var(--border);
+  padding: var(--space-5) var(--space-6);
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.footer-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--success);
+}
+
+.footer-dot.is-offline {
+  background: var(--critical);
+}
+
+@media (max-width: 640px) {
+  .skeleton-tiles-row {
+    grid-template-columns: 1fr;
+  }
+  .app-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

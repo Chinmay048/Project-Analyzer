@@ -1,0 +1,118 @@
+/* ==========================================================================
+   ResultsView Styles (Sticky Section Nav & Choreographed Entrance)
+   ========================================================================== */
+
+.results-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  position: relative;
+}
+
+/* Sticky Frosted Section Nav Pill */
+.results-section-nav-wrapper {
+  position: sticky;
+  top: 60px;
+  z-index: 25;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  margin-top: -8px;
+  margin-bottom: var(--space-2);
+}
+
+.results-section-nav {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px;
+  background: var(--bg-popover);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  max-width: 95vw;
+  overflow-x: auto;
+}
+
+.results-nav-item {
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--duration-fast) var(--spring-snappy);
+}
+
+.results-nav-item:hover {
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+}
+
+.results-nav-item.is-active {
+  color: #ffffff;
+  background: var(--accent);
+  box-shadow: 0 1px 4px var(--accent-tint);
+}
+
+/* Warnings Banner */
+.results-warning-banner {
+  background: var(--warning-tint);
+  border: 1px solid var(--warning-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.results-warning-title {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--warning-text);
+  margin-bottom: 4px;
+}
+
+.results-warning-list {
+  font-size: var(--text-xs);
+  color: var(--text-primary);
+  padding-left: 18px;
+  line-height: 1.5;
+}
+
+/* Choreographed Section Reveal Animations (fade + 12px rise) */
+@keyframes sectionRiseFade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-reveal {
+  animation: sectionRiseFade 400ms var(--ease-out-expo) forwards;
+}
+
+.section-reveal-1 { animation-delay: 0ms; }
+.section-reveal-2 { animation-delay: 45ms; }
+.section-reveal-3 { animation-delay: 90ms; }
+.section-reveal-4 { animation-delay: 135ms; }
+.section-reveal-5 { animation-delay: 180ms; }
+.section-reveal-6 { animation-delay: 225ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .section-reveal {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
